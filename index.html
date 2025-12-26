@@ -6,73 +6,103 @@
     <title>더균(주) - 인터랙티브 기업 카탈로그</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- Lucide Icons for professional UI -->
+    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         body { font-family: 'Noto Sans KR', sans-serif; scroll-behavior: smooth; }
         .chart-container { position: relative; width: 100%; max-width: 700px; margin: 0 auto; height: 350px; }
         .active-section { display: block !important; animation: fadeIn 0.4s ease-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
-        .bg-nature { background-color: #f9fbf9; }
+        
+        .bg-nature { background-color: #f8fafc; }
         .glass-nav { background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(10px); }
         .logo-img { max-height: 55px; width: auto; object-fit: contain; }
+        
+        .hero-gradient {
+            background: linear-gradient(180deg, #f0f9ff 0%, #ffffff 100%);
+        }
+
         .mega-menu-wrapper { display: none; position: absolute; top: 100%; left: 0; right: 0; z-index: 40; padding-top: 1px; }
-        .mega-menu-content { background: white; border: 1px solid #e5e7eb; border-top: none; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); border-bottom-left-radius: 1.5rem; border-bottom-right-radius: 1.5rem; }
+        .mega-menu-content { background: white; border: 1px solid #e2e8f0; border-top: none; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05); border-bottom-left-radius: 1.5rem; border-bottom-right-radius: 1.5rem; }
         .nav-container:hover .mega-menu-wrapper { display: block; animation: slideDown 0.3s ease-out; }
         @keyframes slideDown { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+        
         .field-trial-img { width: 100%; height: 200px; object-fit: cover; background: #f1f5f9; border-radius: 1rem; display: flex; align-items: center; justify-content: center; color: #94a3b8; font-size: 0.8rem; text-align: center; padding: 1rem; }
+        .prod-img-box { width: 100%; height: 260px; overflow: hidden; background: #fff; display: flex; align-items: center; justify-content: center; }
+        .prod-img-box img { width: 100%; height: 100%; object-fit: contain; padding: 1.5rem; transition: transform 0.5s ease; }
+        .prod-card:hover .prod-img-box img { transform: scale(1.08); }
+        
+        .social-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); background: #ffffff; border: 1px solid #f1f5f9; }
+        .social-card:hover { transform: translateY(-5px); border-color: #e2e8f0; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); }
+
+        /* 타이포그래피 미세 조정 */
+        .brand-text {
+            letter-spacing: -0.04em;
+            line-height: 1.1;
+        }
+        .slogan-text {
+            color: #334155;
+            letter-spacing: -0.02em;
+            line-height: 1.3;
+        }
+        .hero-desc-text {
+            color: #64748b;
+            line-height: 1.7;
+        }
     </style>
 </head>
 <body class="bg-nature text-slate-800 min-h-screen flex flex-col">
 
     <!-- Global Navigation -->
-    <nav class="glass-nav sticky top-0 z-50 border-b border-green-100 shadow-sm nav-container">
+    <nav class="glass-nav sticky top-0 z-50 border-b border-blue-100 shadow-sm nav-container">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
             <div class="flex justify-between items-center h-24">
                 <div class="flex-1 flex justify-start items-center cursor-pointer" onclick="app.navigate('home')">
                     <img src="image_768d5e.png" alt="더균 로고" class="logo-img" onerror="this.src='image_76274c.png';">
                 </div>
                 <div class="flex-grow flex justify-center space-x-12">
-                    <button class="text-xl font-bold text-slate-700 hover:text-green-700 py-8" data-i18n="nav_enterprise">기업정보</button>
-                    <button class="text-xl font-bold text-slate-700 hover:text-green-700 py-8" data-i18n="nav_product">제품정보</button>
-                    <button class="text-xl font-bold text-slate-700 hover:text-green-700 py-8" data-i18n="nav_pr">홍보센터</button>
-                    <button class="text-xl font-bold text-slate-700 hover:text-green-700 py-8" data-i18n="nav_community">커뮤니티</button>
+                    <button class="text-xl font-bold text-slate-700 hover:text-blue-700 py-8 transition-colors" data-i18n="nav_enterprise">기업정보</button>
+                    <button class="text-xl font-bold text-slate-700 hover:text-blue-700 py-8 transition-colors" data-i18n="nav_product">제품정보</button>
+                    <button class="text-xl font-bold text-slate-700 hover:text-blue-700 py-8 transition-colors" data-i18n="nav_pr">홍보센터</button>
+                    <button class="text-xl font-bold text-slate-700 hover:text-blue-700 py-8 transition-colors" data-i18n="nav_community">커뮤니티</button>
                 </div>
                 <div class="flex-1 flex justify-end items-center gap-2">
-                    <button onclick="app.setLang('ko')" id="lang-ko" class="text-sm font-bold text-green-700 border-b-2 border-green-700 pb-0.5">KR</button>
+                    <button onclick="app.setLang('ko')" id="lang-ko" class="text-sm font-bold text-blue-700 border-b-2 border-blue-700 pb-0.5">KR</button>
                     <span class="text-slate-300">|</span>
-                    <button onclick="app.setLang('en')" id="lang-en" class="text-sm font-medium text-slate-400 hover:text-green-600 pb-0.5">EN</button>
+                    <button onclick="app.setLang('en')" id="lang-en" class="text-sm font-medium text-slate-400 hover:text-blue-600 pb-0.5">EN</button>
                 </div>
             </div>
             <div class="mega-menu-wrapper">
                 <div class="mega-menu-content p-10 grid grid-cols-4 gap-8">
                     <div>
-                        <h5 class="text-xs font-bold text-green-700 uppercase tracking-widest mb-4" data-i18n="nav_enterprise">기업정보</h5>
+                        <h5 class="text-xs font-bold text-blue-700 uppercase tracking-widest mb-4" data-i18n="nav_enterprise">기업정보</h5>
                         <ul class="space-y-3">
-                            <li><a href="javascript:void(0)" onclick="app.navigate('enterprise', 'intro')" class="text-slate-600 hover:text-green-800 text-sm font-medium" data-i18n="nav_intro">기업소개</a></li>
-                            <li><a href="javascript:void(0)" onclick="app.navigate('enterprise', 'ceo')" class="text-slate-600 hover:text-green-800 text-sm font-medium" data-i18n="nav_ceo">대표소개</a></li>
-                            <li><a href="javascript:void(0)" onclick="app.navigate('enterprise', 'rnd')" class="text-slate-600 hover:text-green-800 text-sm font-medium" data-i18n="nav_rnd">연구개발</a></li>
-                            <li><a href="javascript:void(0)" onclick="app.navigate('enterprise', 'trust')" class="text-slate-600 hover:text-green-800 text-sm font-medium" data-i18n="nav_trust">특허 및 인증</a></li>
+                            <li><a href="javascript:void(0)" onclick="app.navigate('enterprise', 'intro')" class="text-slate-600 hover:text-blue-800 text-sm font-medium" data-i18n="nav_intro">기업소개</a></li>
+                            <li><a href="javascript:void(0)" onclick="app.navigate('enterprise', 'ceo')" class="text-slate-600 hover:text-blue-800 text-sm font-medium" data-i18n="nav_ceo">대표소개</a></li>
+                            <li><a href="javascript:void(0)" onclick="app.navigate('enterprise', 'rnd')" class="text-slate-600 hover:text-blue-800 text-sm font-medium" data-i18n="nav_rnd">연구개발</a></li>
+                            <li><a href="javascript:void(0)" onclick="app.navigate('enterprise', 'trust')" class="text-slate-600 hover:text-blue-800 text-sm font-medium" data-i18n="nav_trust">특허 및 인증</a></li>
                         </ul>
                     </div>
                     <div>
-                        <h5 class="text-xs font-bold text-green-700 uppercase tracking-widest mb-4" data-i18n="nav_product">제품정보</h5>
+                        <h5 class="text-xs font-bold text-blue-700 uppercase tracking-widest mb-4" data-i18n="nav_product">제품정보</h5>
                         <ul class="space-y-3">
-                            <li><a href="javascript:void(0)" onclick="app.navigate('product', 'p1')" class="text-slate-600 hover:text-green-800 text-sm font-medium" data-i18n="prod_1">더균 전용1호</a></li>
-                            <li><a href="javascript:void(0)" onclick="app.navigate('product', 'p2')" class="text-slate-600 hover:text-green-800 text-sm font-medium" data-i18n="prod_2">더균 전용2호</a></li>
-                            <li><a href="javascript:void(0)" onclick="app.navigate('product', 'p3')" class="text-slate-600 hover:text-green-800 text-sm font-medium" data-i18n="prod_3">더균 전용3호</a></li>
+                            <li><a href="javascript:void(0)" onclick="app.navigate('product', 'p1')" class="text-slate-600 hover:text-blue-800 text-sm font-medium" data-i18n="prod_1">전용1호 벨레젠스</a></li>
+                            <li><a href="javascript:void(0)" onclick="app.navigate('product', 'p2')" class="text-slate-600 hover:text-blue-800 text-sm font-medium" data-i18n="prod_2">전용2호 경국대전</a></li>
+                            <li><a href="javascript:void(0)" onclick="app.navigate('product', 'p3')" class="text-slate-600 hover:text-blue-800 text-sm font-medium" data-i18n="prod_3">전용3호 톨러렌스</a></li>
                         </ul>
                     </div>
                     <div>
-                        <h5 class="text-xs font-bold text-green-700 uppercase tracking-widest mb-4" data-i18n="nav_pr">홍보센터</h5>
+                        <h5 class="text-xs font-bold text-blue-700 uppercase tracking-widest mb-4" data-i18n="nav_pr">홍보센터</h5>
                         <ul class="space-y-3">
-                            <li><a href="javascript:void(0)" onclick="app.navigate('pr', 'news')" class="text-slate-600 hover:text-green-800 text-sm font-medium" data-i18n="pr_news">최근 기사</a></li>
+                            <li><a href="javascript:void(0)" onclick="app.navigate('pr', 'news')" class="text-slate-600 hover:text-blue-800 text-sm font-medium" data-i18n="pr_news">최근 기사</a></li>
                         </ul>
                     </div>
                     <div>
-                        <h5 class="text-xs font-bold text-green-700 uppercase tracking-widest mb-4" data-i18n="nav_community">커뮤니티</h5>
+                        <h5 class="text-xs font-bold text-blue-700 uppercase tracking-widest mb-4" data-i18n="nav_community">커뮤니티</h5>
                         <ul class="space-y-3">
-                            <li><a href="javascript:void(0)" onclick="app.navigate('community', 'notice')" class="text-slate-600 hover:text-green-800 text-sm font-medium" data-i18n="com_notice">공지사항</a></li>
-                            <li><a href="javascript:void(0)" onclick="app.navigate('community', 'contact')" class="text-slate-600 hover:text-green-800 text-sm font-medium" data-i18n="com_contact">고객문의</a></li>
+                            <li><a href="javascript:void(0)" onclick="app.navigate('community', 'notice')" class="text-slate-600 hover:text-blue-800 text-sm font-medium" data-i18n="com_notice">공지사항</a></li>
+                            <li><a href="javascript:void(0)" onclick="app.navigate('community', 'contact')" class="text-slate-600 hover:text-blue-800 text-sm font-medium" data-i18n="com_contact">고객문의</a></li>
                         </ul>
                     </div>
                 </div>
@@ -83,15 +113,24 @@
     <!-- Main Content -->
     <main class="flex-grow">
         
-        <!-- HOME SECTION -->
-        <header id="section-home" class="view-section active-section pt-24 pb-32 px-4 bg-white">
-            <div class="max-w-5xl mx-auto text-center">
-                <span class="inline-block py-1.5 px-4 rounded-full bg-green-100 text-green-800 text-xs font-bold mb-6 uppercase tracking-widest" data-i18n="hero_tag">Biological Control Expert</span>
-                <h2 class="text-5xl md:text-7xl font-bold text-slate-900 mb-8 leading-tight" data-i18n="hero_title">미생물로 여는 <br><span class="text-green-700">미래 농업의 기준</span></h2>
-                <p class="text-2xl text-slate-500 mb-12 max-w-3xl mx-auto" data-i18n="hero_desc">더균(주)은 식물병리학 연구를 기반으로 화학 농약의 한계를 넘는 혁신적 미생물 방제 솔루션을 제공합니다.</p>
+        <!-- HOME SECTION: 타이포그래피 크기 및 밸런스 최적화 -->
+        <header id="section-home" class="view-section active-section pt-32 pb-48 px-4 hero-gradient text-center">
+            <div class="max-w-5xl mx-auto">
+                <div class="mb-8 inline-flex items-center gap-2 px-5 py-2 rounded-full bg-blue-50 border border-blue-100 shadow-sm">
+                    <span class="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
+                    <span class="text-blue-600 text-[10px] md:text-xs font-bold uppercase tracking-[0.2em]" data-i18n="hero_tag">Biological Control Expert</span>
+                </div>
+                
+                <h2 class="mb-12 flex flex-col items-center" id="main-hero-title" data-i18n="hero_title">
+                    <span class="brand-text text-green-600 text-6xl md:text-8xl font-black block mb-6 drop-shadow-sm">더균(주)</span>
+                    <span class="slogan-text text-2xl md:text-4xl font-bold">미생물로 여는 미래 농업의 기준</span>
+                </h2>
+                
+                <p class="hero-desc-text text-base md:text-xl mb-16 max-w-2xl mx-auto" data-i18n="hero_desc">더균(주)은 식물병리학 연구를 기반으로 화학 농약의 한계를 넘는 혁신적 미생물 방제 솔루션을 제공합니다.</p>
+                
                 <div class="flex flex-wrap justify-center gap-6">
-                    <button onclick="app.navigate('enterprise')" class="px-10 py-4 bg-green-700 text-white font-bold rounded-xl shadow-xl hover:bg-green-800 transform hover:-translate-y-1 transition-all" data-i18n="btn_explore">회사 둘러보기</button>
-                    <button onclick="app.navigate('product')" class="px-10 py-4 bg-white border-2 border-green-700 text-green-700 font-bold rounded-xl hover:bg-green-50 transform hover:-translate-y-1 transition-all" data-i18n="btn_products">제품 라인업</button>
+                    <button onclick="app.navigate('enterprise')" class="px-10 py-4 bg-blue-700 text-white font-bold rounded-2xl shadow-xl shadow-blue-100 hover:bg-blue-800 transform hover:-translate-y-1 transition-all text-base md:text-lg" data-i18n="btn_explore">회사 둘러보기</button>
+                    <button onclick="app.navigate('product')" class="px-10 py-4 bg-white border-2 border-slate-100 text-slate-600 font-bold rounded-2xl hover:border-blue-700 hover:text-blue-700 transform hover:-translate-y-1 transition-all text-base md:text-lg" data-i18n="btn_products">제품 정보</button>
                 </div>
             </div>
         </header>
@@ -100,57 +139,65 @@
         <section id="section-enterprise" class="view-section hidden py-16 px-4">
             <div class="max-w-7xl mx-auto space-y-32">
                 <div id="sub-intro">
-                    <h4 class="text-3xl font-bold mb-8 text-center" data-i18n="nav_intro">기업소개</h4>
-                    <div class="bg-white p-12 rounded-3xl shadow-sm border border-slate-100 max-w-4xl mx-auto">
-                        <p class="text-slate-600 text-lg leading-relaxed mb-8" data-i18n="intro_p">더균(주)은 2010년 국립경상국립대학교 정용호 교수의 미생물 기반 식물병 방제 연구에서 시작되었습니다. 2021년 2월 법인 설립 이후, 살균제 저항성(SDHI 등) 문제를 해결할 수 있는 생물학적 방제 기술의 상용화에 앞장서고 있습니다.</p>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                            <div class="p-8 bg-slate-50 rounded-2xl">
-                                <span class="text-xs font-bold text-green-700 uppercase tracking-widest">Mission</span>
-                                <p class="mt-4 text-xl font-bold" data-i18n="mission">미생물 공생 기술을 통한 식물 보호의 과학화</p>
+                    <h4 class="text-3xl font-bold mb-8 text-center text-blue-900" data-i18n="nav_intro">기업소개</h4>
+                    <div class="bg-white rounded-3xl shadow-xl border border-slate-100 max-w-5xl mx-auto overflow-hidden">
+                        <div class="flex flex-col md:flex-row">
+                            <div class="md:w-1/2 overflow-hidden bg-slate-200 text-center">
+                                <img src="image_7710dc.jpg" alt="더균 연구소 이미지" class="w-full h-full object-cover min-h-[400px]" onerror="this.style.display='none';">
                             </div>
-                            <div class="p-8 bg-slate-50 rounded-2xl">
-                                <span class="text-xs font-bold text-green-700 uppercase tracking-widest">Vision</span>
-                                <p class="mt-4 text-xl font-bold" data-i18n="vision">글로벌 Top-tier 생물농약 기술 전문 기업</p>
+                            <div class="md:w-1/2 p-12 flex flex-col justify-center bg-white">
+                                <h5 class="font-bold text-2xl mb-6 text-blue-800" data-i18n="intro_h5">지속 가능한 방제 파트너</h5>
+                                <p class="text-slate-600 text-lg leading-relaxed mb-8" data-i18n="intro_p">더균(주)은 2010년 국립경상국립대학교 정용호 교수의 미생물 기반 식물병 방제 연구에서 시작되었습니다. 2021년 2월 법인 설립 이후, 살균제 저항성(SDHI 등) 문제를 해결할 수 있는 생물학적 방제 기술의 상용화에 앞장서고 있습니다.</p>
+                                <div class="grid grid-cols-1 gap-4">
+                                    <div class="p-6 bg-blue-50 rounded-2xl border-l-4 border-blue-700">
+                                        <span class="text-xs font-bold text-blue-700 uppercase tracking-widest">Mission</span>
+                                        <p class="mt-2 text-lg font-bold text-slate-800" data-i18n="mission">미생물 공생 기술을 통한 식물 보호의 과학화</p>
+                                    </div>
+                                    <div class="p-6 bg-blue-50 rounded-2xl border-l-4 border-blue-700">
+                                        <span class="text-xs font-bold text-blue-700 uppercase tracking-widest">Vision</span>
+                                        <p class="mt-2 text-lg font-bold text-slate-800" data-i18n="vision">글로벌 Top-tier 생물농약 기술 전문 기업</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div id="sub-trust">
-                    <h4 class="text-3xl font-bold mb-8 text-center" data-i18n="nav_trust">특허 및 인증</h4>
+                    <h4 class="text-3xl font-bold mb-8 text-center text-blue-900" data-i18n="nav_trust">특허 및 인증</h4>
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                        <div class="bg-white p-6 rounded-2xl border border-slate-100 text-center shadow-sm">
+                        <div class="bg-white p-6 rounded-2xl border border-blue-50 text-center shadow-sm hover:border-blue-200 transition-colors">
                             <div class="text-3xl mb-3">📜</div>
-                            <h6 class="font-bold text-sm mb-1">특허 제XXXX호</h6>
+                            <h6 class="font-bold text-sm mb-1 text-slate-800">특허 제XXXX호</h6>
                             <p class="text-xs text-slate-400">유용균주 선발 및 제형화 기술</p>
                         </div>
-                        <div class="bg-white p-6 rounded-2xl border border-slate-100 text-center shadow-sm">
+                        <div class="bg-white p-6 rounded-2xl border border-blue-50 text-center shadow-sm hover:border-blue-200 transition-colors">
                             <div class="text-3xl mb-3">🏅</div>
-                            <h6 class="font-bold text-sm mb-1">벤처기업 인증</h6>
+                            <h6 class="font-bold text-sm mb-1 text-slate-800">벤처기업 인증</h6>
                             <p class="text-xs text-slate-400">기술보증기금 확인</p>
                         </div>
-                        <div class="bg-white p-6 rounded-2xl border border-slate-100 text-center shadow-sm">
+                        <div class="bg-white p-6 rounded-2xl border border-blue-50 text-center shadow-sm hover:border-blue-200 transition-colors">
                             <div class="text-3xl mb-3">🏫</div>
-                            <h6 class="font-bold text-sm mb-1">실험실 창업</h6>
+                            <h6 class="font-bold text-sm mb-1 text-slate-800">실험실 창업</h6>
                             <p class="text-xs text-slate-400">경상국립대 산학협력단</p>
                         </div>
-                        <div class="bg-white p-6 rounded-2xl border border-slate-100 text-center shadow-sm">
+                        <div class="bg-white p-6 rounded-2xl border border-blue-50 text-center shadow-sm hover:border-blue-200 transition-colors">
                             <div class="text-3xl mb-3">🔍</div>
-                            <h6 class="font-bold text-sm mb-1">기업부설연구소</h6>
+                            <h6 class="font-bold text-sm mb-1 text-slate-800">기업부설연구소</h6>
                             <p class="text-xs text-slate-400">과학기술정보통신부 인증</p>
                         </div>
                     </div>
                 </div>
 
                 <div id="sub-rnd">
-                    <h4 class="text-3xl font-bold mb-8 text-center" data-i18n="nav_rnd">연구개발</h4>
+                    <h4 class="text-3xl font-bold mb-8 text-center text-blue-900" data-i18n="nav_rnd">연구개발</h4>
                     <div class="bg-white p-12 rounded-3xl shadow-sm max-w-5xl mx-auto">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                             <div>
-                                <h5 class="text-xl font-bold mb-4">포장 시험 성과 (Field Trial)</h5>
+                                <h5 class="text-xl font-bold mb-4 text-slate-800">포장 시험 성과 (Field Trial)</h5>
                                 <div class="grid grid-cols-2 gap-4">
                                     <div class="field-trial-img">Control<br>(무처리구)</div>
-                                    <div class="field-trial-img bg-green-50 border border-green-200">The Gyun<br>(처리구)</div>
+                                    <div class="field-trial-img bg-blue-50 border border-blue-100 text-blue-600 font-bold">The Gyun<br>(처리구)</div>
                                 </div>
                                 <p class="text-xs text-slate-400 mt-4">* 2023년 경남 지역 과수 농가 Alternaria 방제 시험 결과</p>
                             </div>
@@ -165,13 +212,63 @@
 
         <!-- PRODUCT SECTION -->
         <section id="section-product" class="view-section hidden py-20 px-4">
+            <div class="max-w-7xl mx-auto text-center mb-16">
+                <h3 class="text-4xl font-bold text-blue-900" data-i18n="nav_product">제품정보</h3>
+                <p class="text-xl text-slate-500 mt-4" data-i18n="prod_tag">현장의 목소리를 반영한 더균만의 전용 솔루션</p>
+            </div>
+            
             <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
-                <div id="sub-p1" class="bg-white rounded-[2.5rem] overflow-hidden shadow-xl border border-slate-100 group">
-                    <div class="h-64 bg-green-700 flex items-center justify-center text-white text-7xl group-hover:scale-105 transition-transform">🧪</div>
-                    <div class="p-10">
-                        <h4 class="text-3xl font-bold mb-4" data-i18n="prod_1">더균 전용1호</h4>
-                        <p class="text-slate-600 text-base mb-8" data-i18n="prod_1_desc">뿌리혹병, 시듦병 등 토양 전염성 병원균에 특화된 고활성 미생물 제품</p>
-                        <button class="w-full py-3 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold text-slate-400" data-i18n="btn_manual">제품 설명서 다운로드</button>
+                <div id="sub-p1" class="prod-card bg-white rounded-[2.5rem] overflow-hidden shadow-xl border border-slate-100 group transition-all hover:shadow-2xl">
+                    <div class="prod-img-box bg-slate-50">
+                        <img src="image_777540.png" alt="전용1호 벨레젠스" onerror="this.src='https://via.placeholder.com/300?text=Velezence';">
+                    </div>
+                    <div class="p-10 border-t border-slate-50">
+                        <span class="px-3 py-1 bg-sky-100 text-sky-700 text-xs font-bold rounded-lg mb-4 inline-block" data-i18n="prod_1_label">경엽 살포 전용</span>
+                        <h4 class="text-3xl font-bold mb-4 text-slate-800" data-i18n="prod_1">전용1호 벨레젠스</h4>
+                        <p class="text-slate-600 text-base mb-8 leading-relaxed" data-i18n="prod_1_desc">흰가루병, 검은무늬병(Alternaria) 등 지상부 병해 방제에 최적화된 고활성 제제</p>
+                        <button class="w-full py-3 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold text-slate-500 transition-colors hover:bg-blue-700 hover:text-white hover:border-blue-700" data-i18n="btn_manual">제품 설명서 다운로드</button>
+                    </div>
+                </div>
+                <div id="sub-p2" class="prod-card bg-white rounded-[2.5rem] overflow-hidden shadow-xl border border-slate-100 group transition-all hover:shadow-2xl">
+                    <div class="prod-img-box bg-slate-50">
+                        <img src="image_777540.png" alt="전용2호 경국대전" onerror="this.src='https://via.placeholder.com/300?text=Kyungook-Daejeon';">
+                    </div>
+                    <div class="p-10 border-t border-slate-50">
+                        <span class="px-3 py-1 bg-indigo-100 text-indigo-700 text-xs font-bold rounded-lg mb-4 inline-block" data-i18n="prod_2_label">토양 관주 전용</span>
+                        <h4 class="text-3xl font-bold mb-4 text-slate-800" data-i18n="prod_2">전용2호 경국대전</h4>
+                        <p class="text-slate-600 text-base mb-8 leading-relaxed" data-i18n="prod_2_desc">뿌리혹병, 시듦병(Fusarium) 등 토양 전염성 병원균 억제 전문</p>
+                        <button class="w-full py-3 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold text-slate-500 transition-colors hover:bg-blue-700 hover:text-white hover:border-blue-700" data-i18n="btn_manual">제품 설명서 다운로드</button>
+                    </div>
+                </div>
+                <div id="sub-p3" class="prod-card bg-white rounded-[2.5rem] overflow-hidden shadow-xl border border-slate-100 group transition-all hover:shadow-2xl">
+                    <div class="prod-img-box bg-slate-50">
+                        <img src="image_777540.png" alt="전용3호 톨러렌스" onerror="this.src='https://via.placeholder.com/300?text=Tolerance';">
+                    </div>
+                    <div class="p-10 border-t border-slate-50">
+                        <span class="px-3 py-1 bg-cyan-100 text-cyan-700 text-xs font-bold rounded-lg mb-4 inline-block" data-i18n="prod_3_label">첨단 정밀 농업 솔루션</span>
+                        <h4 class="text-3xl font-bold mb-4 text-slate-800" data-i18n="prod_3">전용3호 톨러렌스</h4>
+                        <p class="text-slate-600 text-base mb-8 leading-relaxed" data-i18n="prod_3_desc">스마트팜 양액 시스템 최적화 제제로 환경 제어 하의 병해 예방</p>
+                        <button class="w-full py-3 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold text-slate-500 transition-colors hover:bg-blue-700 hover:text-white hover:border-blue-700" data-i18n="btn_manual">제품 설명서 다운로드</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PR SECTION -->
+        <section id="section-pr" class="view-section hidden py-20 px-4">
+            <div class="max-w-4xl mx-auto">
+                <h3 class="text-3xl font-bold mb-12 text-slate-900" data-i18n="nav_pr">홍보센터</h3>
+                <div id="sub-news" class="space-y-10">
+                    <div class="bg-white p-10 rounded-[2rem] flex flex-col md:flex-row gap-10 shadow-sm border border-slate-100 hover:border-blue-300 transition-all cursor-pointer">
+                        <div class="w-full md:w-56 h-40 bg-slate-100 rounded-2xl flex items-center justify-center text-6xl text-blue-800">📰</div>
+                        <div class="flex-1">
+                            <div class="flex items-center gap-3 mb-4">
+                                <span class="text-sm font-bold text-blue-700" data-i18n="news_tag_1">월간인물 11월호</span>
+                                <span class="text-sm text-slate-400">2023.11</span>
+                            </div>
+                            <h4 class="text-2xl font-bold mb-4 text-slate-800" data-i18n="news_title_1">"미생물로 식물의 병을 고치고, 지구의 건강을 지키다"</h4>
+                            <p class="text-slate-500 text-lg leading-relaxed italic" data-i18n="news_desc_1">정용호 교수의 식물병리학적 연구 가치와 더균(주)의 친환경 비전 집중 보도</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -179,26 +276,24 @@
 
         <!-- COMMUNITY SECTION -->
         <section id="section-community" class="view-section hidden py-20 px-4">
-            <div class="max-w-7xl mx-auto space-y-24">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-20">
-                    <div id="sub-notice">
-                        <h3 class="text-3xl font-bold mb-10" data-i18n="com_notice">공지사항</h3>
-                        <div class="bg-white rounded-[2rem] shadow-sm border border-slate-100 overflow-hidden divide-y divide-slate-100">
-                            <div class="p-8 hover:bg-green-50 transition-colors cursor-pointer">
-                                <span class="text-sm text-slate-400">2023.12.20</span>
-                                <h5 class="text-lg font-bold text-slate-800 mt-2" data-i18n="notice_1">2024년도 제품 공급 일정 안내</h5>
-                            </div>
+            <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-20">
+                <div id="sub-notice">
+                    <h3 class="text-3xl font-bold mb-10 text-slate-900" data-i18n="com_notice">공지사항</h3>
+                    <div class="bg-white rounded-[2rem] shadow-sm border border-slate-100 overflow-hidden divide-y divide-slate-100">
+                        <div class="p-8 hover:bg-blue-50 transition-colors cursor-pointer">
+                            <span class="text-sm text-slate-400">2023.12.20</span>
+                            <h5 class="text-lg font-bold text-slate-800 mt-2" data-i18n="notice_1">2024년도 제품 공급 일정 안내</h5>
                         </div>
                     </div>
-                    <div id="sub-contact">
-                        <h3 class="text-3xl font-bold mb-10" data-i18n="com_contact">고객문의</h3>
-                        <div class="bg-white p-12 rounded-[2.5rem] shadow-2xl border border-slate-100">
-                            <form onsubmit="event.preventDefault(); alert('발송되었습니다.');" class="space-y-6">
-                                <input type="text" class="w-full px-6 py-4 bg-slate-50 border border-slate-200 rounded-2xl outline-none" placeholder="성함 / Name" required>
-                                <textarea rows="4" class="w-full px-6 py-4 bg-slate-50 border border-slate-200 rounded-2xl outline-none" placeholder="문의 내용 / Message" required></textarea>
-                                <button type="submit" class="w-full py-5 bg-green-700 text-white font-bold rounded-2xl hover:bg-green-800 transition-all shadow-lg" data-i18n="btn_send">문의하기</button>
-                            </form>
-                        </div>
+                </div>
+                <div id="sub-contact">
+                    <h3 class="text-3xl font-bold mb-10" data-i18n="com_contact">고객문의</h3>
+                    <div class="bg-white p-12 rounded-[2.5rem] shadow-2xl border border-slate-100">
+                        <form onsubmit="event.preventDefault(); alert('발송되었습니다.');" class="space-y-6">
+                            <input type="text" class="w-full px-6 py-4 bg-slate-50 border border-slate-200 rounded-2xl outline-none focus:ring-2 focus:ring-blue-500" placeholder="성함 / Name" required>
+                            <textarea rows="4" class="w-full px-6 py-4 bg-slate-50 border border-slate-200 rounded-2xl outline-none focus:ring-2 focus:ring-blue-500" placeholder="문의 내용 / Message" required></textarea>
+                            <button type="submit" class="w-full py-5 bg-blue-700 text-white font-bold rounded-2xl hover:bg-blue-800 transition-all shadow-lg" data-i18n="btn_send">문의하기</button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -215,9 +310,47 @@
             </div>
             <div>
                 <h4 class="text-white font-bold mb-8 uppercase tracking-widest text-sm">Location</h4>
-                <p class="text-sm">📍 <span data-i18n="footer_addr">경남 진주시 가좌동 경상국립대학교 농업생명과학대학</span></p>
-                <p class="text-sm mt-2">📞 055-772-XXXX | 📧 contact@thegyun.com</p>
+                <p class="text-sm">📍 <span data-i18n="footer_addr">경북 안동시 풍산읍 번곡길 5-2 제2동 제1호</span></p>
+                <p class="text-sm mt-2">📞 054-XXX-XXXX | 📧 contact@thegyun.com</p>
             </div>
+            <div class="text-right">
+                <h4 class="text-white font-bold mb-6 uppercase tracking-widest text-sm">Connect</h4>
+                <div class="flex justify-end gap-4">
+                    <a href="https://youtube.com" target="_blank" class="social-card group relative block w-24 h-16 rounded-xl overflow-hidden border border-red-100/20">
+                        <div class="absolute inset-0 bg-red-600/5 group-hover:bg-red-600/10 transition-colors"></div>
+                        <div class="flex items-center justify-center h-full p-4">
+                            <img src="image_768d5e.png" alt="더균 마크" class="w-full h-full object-contain opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all">
+                        </div>
+                        <div class="absolute top-1.5 right-1.5">
+                            <i data-lucide="youtube" class="text-red-600 w-3.5 h-3.5"></i>
+                        </div>
+                        <div class="absolute bottom-0 inset-x-0 bg-red-600 text-[8px] text-center font-bold text-white py-0.5 opacity-0 group-hover:opacity-100 transition-opacity uppercase tracking-tighter">YouTube</div>
+                    </a>
+                    <a href="https://facebook.com" target="_blank" class="social-card group relative block w-24 h-16 rounded-xl overflow-hidden border border-blue-100/20">
+                        <div class="absolute inset-0 bg-blue-600/5 group-hover:bg-blue-600/10 transition-colors"></div>
+                        <div class="flex items-center justify-center h-full p-4">
+                            <img src="image_768d5e.png" alt="더균 마크" class="w-full h-full object-contain opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all">
+                        </div>
+                        <div class="absolute top-1.5 right-1.5">
+                            <i data-lucide="facebook" class="text-blue-600 w-3.5 h-3.5"></i>
+                        </div>
+                        <div class="absolute bottom-0 inset-x-0 bg-blue-600 text-[8px] text-center font-bold text-white py-0.5 opacity-0 group-hover:opacity-100 transition-opacity uppercase tracking-tighter">Facebook</div>
+                    </a>
+                    <a href="https://instagram.com" target="_blank" class="social-card group relative block w-24 h-16 rounded-xl overflow-hidden border border-pink-100/20">
+                        <div class="absolute inset-0 bg-pink-600/5 group-hover:bg-pink-600/10 transition-colors"></div>
+                        <div class="flex items-center justify-center h-full p-4">
+                            <img src="image_768d5e.png" alt="더균 마크" class="w-full h-full object-contain opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all">
+                        </div>
+                        <div class="absolute top-1.5 right-1.5">
+                            <i data-lucide="instagram" class="text-pink-600 w-3.5 h-3.5"></i>
+                        </div>
+                        <div class="absolute bottom-0 inset-x-0 bg-pink-600 text-[8px] text-center font-bold text-white py-0.5 opacity-0 group-hover:opacity-100 transition-opacity uppercase tracking-tighter">Instagram</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto mt-20 pt-10 border-t border-slate-800 text-center text-xs tracking-widest text-slate-500">
+            &copy; 2025 THE GYUN CO., LTD. ALL RIGHTS RESERVED.
         </div>
     </footer>
 
@@ -226,37 +359,56 @@
             ko: {
                 nav_enterprise: "기업정보", nav_product: "제품정보", nav_pr: "홍보센터", nav_community: "커뮤니티",
                 nav_intro: "기업소개", nav_ceo: "대표소개", nav_rnd: "연구개발", nav_trust: "특허 및 인증",
-                prod_1: "더균 전용1호", prod_2: "더균 전용2호", prod_3: "더균 전용3호", pr_news: "최근 기사",
+                prod_1: "전용1호 벨레젠스", prod_2: "전용2호 경국대전", prod_3: "전용3호 톨러렌스", pr_news: "최근 기사",
                 com_notice: "공지사항", com_contact: "고객문의",
-                hero_tag: "Biological Control Expert", hero_title: "미생물로 여는 <br><span class='text-green-700'>미래 농업의 기준</span>",
+                hero_tag: "Biological Control Expert",
+                hero_title: '<span class="brand-text text-green-600 text-6xl md:text-8xl font-black block mb-6 drop-shadow-sm">더균(주)</span><span class="slogan-text text-2xl md:text-4xl font-bold">미생물로 여는 미래 농업의 기준</span>',
                 hero_desc: "더균(주)은 식물병리학 연구를 기반으로 화학 농약의 한계를 넘는 혁신적 미생물 방제 솔루션을 제공합니다.",
-                btn_explore: "회사 둘러보기", btn_products: "제품 라인업",
+                btn_explore: "회사 둘러보기", btn_products: "제품 정보",
+                intro_h5: "지속 가능한 방제 파트너", intro_p: "더균(주)은 2010년 국립경상국립대학교 정용호 교수의 미생물 기반 식물병 방제 연구에서 시작되었습니다.",
                 mission: "미생물 공생 기술을 통한 식물 보호의 과학화", vision: "글로벌 Top-tier 생물농약 기술 전문 기업",
                 btn_manual: "제품 설명서 다운로드", btn_send: "문의하기", 
                 footer_slogan: "식물의 의사(Doctor)가 되어 자연과 인간이 공생하는 건강한 먹거리를 만듭니다.",
-                footer_addr: "경남 진주시 가좌동 경상국립대학교 농업생명과학대학"
+                footer_addr: "경북 안동시 풍산읍 번곡길 5-2 제2동 제1호",
+                prod_tag: "현장의 목소리를 반영한 더균만의 전용 솔루션",
+                prod_1_label: "경엽 살포 전용", prod_1_desc: "흰가루병, 검은무늬병(Alternaria) 등 지상부 병해 방제에 최적화된 고활성 제제",
+                prod_2_label: "토양 관주 전용", prod_2_desc: "뿌리혹병, 시듦병(Fusarium) 등 토양 전염성 병원균 억제 전문",
+                prod_3_label: "첨단 정밀 농업 솔루션", prod_3_desc: "스마트팜 양액 시스템 최적화 제제로 환경 제어 하의 병해 예방",
+                news_tag_1: "잡지 보도", news_title_1: "미생물로 식물의 병을 고치고, 지구의 건강을 지키다", news_desc_1: "월간인물 11월호 인터뷰 기사",
+                notice_1: "2024년도 제품 공급 일정 안내"
             },
             en: {
                 nav_enterprise: "About Us", nav_product: "Products", nav_pr: "News", nav_community: "Community",
                 nav_intro: "Company", nav_ceo: "CEO", nav_rnd: "R&D", nav_trust: "IP & Cert",
-                prod_1: "TG-Dedicated 01", prod_2: "TG-Dedicated 02", prod_3: "TG-Dedicated 03", pr_news: "Recent News",
+                prod_1: "Dedicated 01 Velezence", prod_2: "Dedicated 02 Kyungook-Daejeon", prod_3: "Dedicated 03 Tolerance", pr_news: "Recent News",
                 com_notice: "Notice", com_contact: "Contact",
-                hero_tag: "Biological Control Expert", hero_title: "The Standard for <br><span class='text-green-700'>Future Agriculture</span>",
-                hero_desc: "The Gyun Co., Ltd. provides innovative microbial control solutions that overcome the limits of chemical pesticides.",
-                btn_explore: "Explore Company", btn_products: "Product Lineup",
+                hero_tag: "Biological Control Expert",
+                hero_title: '<span class="brand-text text-green-600 text-5xl md:text-7xl font-black block mb-6 drop-shadow-sm">THE GYUN CO.</span><span class="slogan-text text-xl md:text-3xl font-bold">Standard for Future Agriculture</span>',
+                hero_desc: "The Gyun Co., Ltd. provides innovative microbial control solutions based on plant pathology research.",
+                btn_explore: "Explore Company", btn_products: "Product Info",
+                intro_h5: "Sustainable Control Partner", intro_p: "Founded in 2021 in Andong, commercializing research since 2010.",
                 mission: "Scientific Plant Protection through Microbes", vision: "Global Top-tier Biopesticide Tech Company",
                 btn_manual: "Download Manual (PDF)", btn_send: "Send Message",
                 footer_slogan: "Being a Plant Doctor for Sustainable Coexistence of Nature and Humans.",
-                footer_addr: "Gyeongsang National Univ., Jinju-si, South Korea"
+                footer_addr: "5-2 Bungok-gil, Pungsan-eup, Andong, South Korea",
+                prod_tag: "Professional Solutions Inspired by the Field",
+                prod_1_label: "Foliar Spray", prod_1_desc: "Optimized for Alternaria leaf spot and Powdery Mildew",
+                prod_2_label: "Soil Drench", prod_2_desc: "Expert in Fusarium wilt and soil-borne pathogens",
+                prod_3_label: "Precision Ag Solution", prod_3_desc: "Optimized for hydroponics and smart environment control",
+                news_tag_1: "Media Report", news_title_1: "Healing Plants with Microbes, Saving the Earth", news_desc_1: "Monthly People - Nov Issue Interview",
+                notice_1: "2024 Q1 Supply Schedule"
             }
         };
 
         const app = {
             currentSection: 'home',
             currentLang: 'ko',
+            rndChart: null,
+
             init: function() {
                 this.renderRndChart();
                 this.setLang('ko');
+                lucide.createIcons();
             },
             setLang: function(lang) {
                 this.currentLang = lang;
@@ -264,8 +416,8 @@
                     const key = el.getAttribute('data-i18n');
                     if (i18n[lang][key]) el.innerHTML = i18n[lang][key];
                 });
-                document.getElementById('lang-ko').className = lang === 'ko' ? 'text-sm font-bold text-green-700 border-b-2 border-green-700 pb-0.5' : 'text-sm font-medium text-slate-400 hover:text-green-600 pb-0.5';
-                document.getElementById('lang-en').className = lang === 'en' ? 'text-sm font-bold text-green-700 border-b-2 border-green-700 pb-0.5' : 'text-sm font-medium text-slate-400 hover:text-green-600 pb-0.5';
+                document.getElementById('lang-ko').className = lang === 'ko' ? 'text-sm font-bold text-blue-700 border-b-2 border-blue-700 pb-0.5' : 'text-sm font-medium text-slate-400 hover:text-blue-600 pb-0.5';
+                document.getElementById('lang-en').className = lang === 'en' ? 'text-sm font-bold text-blue-700 border-b-2 border-blue-700 pb-0.5' : 'text-sm font-medium text-slate-400 hover:text-blue-600 pb-0.5';
             },
             navigate: function(sectionId, subId = null) {
                 document.querySelectorAll('.view-section').forEach(el => el.classList.add('hidden'));
@@ -284,7 +436,7 @@
                     type: 'bar',
                     data: {
                         labels: ['뿌리혹병', '시듦병', '흰가루병', 'Alternaria'],
-                        datasets: [{ label: '방제가 (%)', data: [88, 82, 94, 86], backgroundColor: 'rgba(21, 128, 61, 0.8)', borderRadius: 8 }]
+                        datasets: [{ label: '방제가 (%)', data: [88, 82, 94, 86], backgroundColor: 'rgba(29, 78, 216, 0.8)', borderRadius: 8 }]
                     },
                     options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', scales: { x: { max: 100 } }, plugins: { legend: { display: false } } }
                 });
