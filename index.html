@@ -19,7 +19,7 @@
         .mega-menu-content { background: white; border: 1px solid #e5e7eb; border-top: none; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); border-bottom-left-radius: 1.5rem; border-bottom-right-radius: 1.5rem; }
         .nav-container:hover .mega-menu-wrapper { display: block; animation: slideDown 0.3s ease-out; }
         @keyframes slideDown { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
-        .field-trial-img { width: 100%; height: 200px; object-fit: cover; background: #f1f5f9; border-radius: 1rem; display: flex; items-center; justify-center; color: #94a3b8; font-size: 0.8rem; text-align: center; padding: 1rem; }
+        .field-trial-img { width: 100%; height: 200px; object-fit: cover; background: #f1f5f9; border-radius: 1rem; display: flex; align-items: center; justify-content: center; color: #94a3b8; font-size: 0.8rem; text-align: center; padding: 1rem; }
     </style>
 </head>
 <body class="bg-nature text-slate-800 min-h-screen flex flex-col">
@@ -73,7 +73,6 @@
                         <ul class="space-y-3">
                             <li><a href="javascript:void(0)" onclick="app.navigate('community', 'notice')" class="text-slate-600 hover:text-green-800 text-sm font-medium" data-i18n="com_notice">공지사항</a></li>
                             <li><a href="javascript:void(0)" onclick="app.navigate('community', 'contact')" class="text-slate-600 hover:text-green-800 text-sm font-medium" data-i18n="com_contact">고객문의</a></li>
-                            <li><a href="javascript:void(0)" onclick="app.navigate('community', 'map')" class="text-slate-600 hover:text-green-800 text-sm font-medium" data-i18n="com_map">오시는 길</a></li>
                         </ul>
                     </div>
                 </div>
@@ -175,28 +174,21 @@
                         <button class="w-full py-3 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold text-slate-400" data-i18n="btn_manual">제품 설명서 다운로드</button>
                     </div>
                 </div>
-                <!-- ... Product 2, 3 remains same structure ... -->
             </div>
         </section>
 
-        <!-- PR & COMMUNITY (Location Included) -->
+        <!-- COMMUNITY SECTION -->
         <section id="section-community" class="view-section hidden py-20 px-4">
             <div class="max-w-7xl mx-auto space-y-24">
-                <div id="sub-map">
-                    <h3 class="text-3xl font-bold mb-10 text-center" data-i18n="com_map">오시는 길</h3>
-                    <div class="w-full h-96 bg-slate-200 rounded-3xl flex items-center justify-center text-slate-400 relative overflow-hidden">
-                        <p class="z-10 bg-white px-4 py-2 rounded-lg shadow-sm">📍 경상남도 진주시 가좌동 경상국립대학교 농업생명과학대학</p>
-                        <!-- 지도 API 삽입 시 이 위치에 iframe 등이 들어갑니다 -->
-                        <div class="absolute inset-0 bg-slate-100 opacity-50 flex flex-wrap gap-4 p-4 overflow-hidden">
-                            <div class="w-full h-full border-2 border-dashed border-slate-300 rounded-2xl"></div>
-                        </div>
-                    </div>
-                </div>
-                
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-20">
                     <div id="sub-notice">
                         <h3 class="text-3xl font-bold mb-10" data-i18n="com_notice">공지사항</h3>
-                        <!-- Notice items... -->
+                        <div class="bg-white rounded-[2rem] shadow-sm border border-slate-100 overflow-hidden divide-y divide-slate-100">
+                            <div class="p-8 hover:bg-green-50 transition-colors cursor-pointer">
+                                <span class="text-sm text-slate-400">2023.12.20</span>
+                                <h5 class="text-lg font-bold text-slate-800 mt-2" data-i18n="notice_1">2024년도 제품 공급 일정 안내</h5>
+                            </div>
+                        </div>
                     </div>
                     <div id="sub-contact">
                         <h3 class="text-3xl font-bold mb-10" data-i18n="com_contact">고객문의</h3>
@@ -235,7 +227,7 @@
                 nav_enterprise: "기업정보", nav_product: "제품정보", nav_pr: "홍보센터", nav_community: "커뮤니티",
                 nav_intro: "기업소개", nav_ceo: "대표소개", nav_rnd: "연구개발", nav_trust: "특허 및 인증",
                 prod_1: "더균 전용1호", prod_2: "더균 전용2호", prod_3: "더균 전용3호", pr_news: "최근 기사",
-                com_notice: "공지사항", com_contact: "고객문의", com_map: "오시는 길",
+                com_notice: "공지사항", com_contact: "고객문의",
                 hero_tag: "Biological Control Expert", hero_title: "미생물로 여는 <br><span class='text-green-700'>미래 농업의 기준</span>",
                 hero_desc: "더균(주)은 식물병리학 연구를 기반으로 화학 농약의 한계를 넘는 혁신적 미생물 방제 솔루션을 제공합니다.",
                 btn_explore: "회사 둘러보기", btn_products: "제품 라인업",
@@ -248,7 +240,7 @@
                 nav_enterprise: "About Us", nav_product: "Products", nav_pr: "News", nav_community: "Community",
                 nav_intro: "Company", nav_ceo: "CEO", nav_rnd: "R&D", nav_trust: "IP & Cert",
                 prod_1: "TG-Dedicated 01", prod_2: "TG-Dedicated 02", prod_3: "TG-Dedicated 03", pr_news: "Recent News",
-                com_notice: "Notice", com_contact: "Contact", com_map: "Location",
+                com_notice: "Notice", com_contact: "Contact",
                 hero_tag: "Biological Control Expert", hero_title: "The Standard for <br><span class='text-green-700'>Future Agriculture</span>",
                 hero_desc: "The Gyun Co., Ltd. provides innovative microbial control solutions that overcome the limits of chemical pesticides.",
                 btn_explore: "Explore Company", btn_products: "Product Lineup",
